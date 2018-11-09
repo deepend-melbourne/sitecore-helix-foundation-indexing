@@ -32,5 +32,8 @@ namespace Sitecore.Foundation.Indexing.Models
 
         [IndexField(Constants.IndexFields.IsLatestVersion)]
         public bool IsLatestVersion { get; set; }
+
+        [IndexField(Constants.IndexFields.LocalDatasourceContent)]
+        public string LocalDatasourceContent { get; set; }
     }
 }

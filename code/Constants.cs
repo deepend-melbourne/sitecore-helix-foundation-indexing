@@ -11,6 +11,7 @@ namespace Sitecore.Foundation.Indexing
             public const string ContentType = "content_type";
             public const string SearchResultFormatter = "search_result_formatter";
             public const string Url = "url";
+            public const string LocalDatasourceContent = "local_datasource_content_s";
         }
     }
 }
