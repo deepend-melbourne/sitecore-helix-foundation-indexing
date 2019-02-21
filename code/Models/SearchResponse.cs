@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sitecore.Foundation.Models.Models.Interfaces;
+using Sitecore.ContentSearch.Linq;
 
 namespace Sitecore.Foundation.Indexing.Search.Models
 {
@@ -38,5 +39,10 @@ namespace Sitecore.Foundation.Indexing.Search.Models
                 return (TotalSearchResults + PageSize - 1) / PageSize;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the facet results that were returned.
+        /// </summary>
+        public FacetResults FacetResults { get; set; }
     }
 }

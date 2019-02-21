@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Glass.Mapper.Sc;
 using Sitecore.ContentSearch;
 using Sitecore.ContentSearch.Linq;
@@ -53,8 +53,10 @@ namespace Sitecore.Foundation.Indexing.Services
                 }
 
                 query = ApplyPredicates(query, request);
+                query = ApplyFacets(query, request);
 
                 var results = query.GetResults();
+                var facets = query.GetFacets();
 
                 var items = results.Hits.Skip(request.Skip)
                             .Take(request.PageSize)
@@ -68,7 +70,8 @@ namespace Sitecore.Foundation.Indexing.Services
                     Page = request.Page,
                     PageSize = request.PageSize,
                     TotalSearchResults = results.TotalSearchResults,
-                    Results = items
+                    Results = items,
+                    FacetResults = facets
                 };
             }
         }
@@ -81,6 +84,15 @@ namespace Sitecore.Foundation.Indexing.Services
         /// <param name="request"></param>
         /// <returns></returns>
         protected abstract IQueryable<TSearchResultItem> ApplyPredicates(IQueryable<TSearchResultItem> query, TSearchRequest request);
+
+        /// <summary>
+        /// This is the extension point that is called by the Search method, which allows your deriving class
+        /// to apply custom facets logic in order to facet the search results.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        protected abstract IQueryable<TSearchResultItem> ApplyFacets(IQueryable<TSearchResultItem> query, TSearchRequest request);
 
         protected virtual TModel Cast(Item item) => SitecoreService.Cast<TModel>(item);
     }
