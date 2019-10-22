@@ -30,7 +30,7 @@ namespace Sitecore.Foundation.Indexing.Infrastructure.Fields
 
                 GetAllTemplates(item.Template, templates);
 
-                return templates;
+                return templates.ToArray();
             }
             catch (Exception ex)
             {
