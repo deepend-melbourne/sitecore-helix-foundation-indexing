@@ -42,16 +42,23 @@ namespace Sitecore.Foundation.Indexing.Infrastructure.Fields
 
         public void GetAllTemplates(TemplateItem baseTemplate, List<string> list)
         {
-            var str = IdHelper.NormalizeGuid(baseTemplate.ID);
-            list.Add(str);
-            if (baseTemplate.ID == TemplateIDs.StandardTemplate)
+            try
             {
-                return;
-            }
+                var str = IdHelper.NormalizeGuid(baseTemplate.ID);
+                list.Add(str);
+                if (baseTemplate.ID == TemplateIDs.StandardTemplate)
+                {
+                    return;
+                }
 
-            foreach (var item in baseTemplate.BaseTemplates)
+                foreach (var item in baseTemplate.BaseTemplates)
+                {
+                    this.GetAllTemplates(item, list);
+                }
+            }
+            catch (Exception ex)
             {
-                this.GetAllTemplates(item, list);
+                Log.Error($"GetAllTemplates baseTemplate '{baseTemplate?.ID.Guid.ToString() ?? "(null)"}' failed on.", ex, this);
             }
         }
     }
