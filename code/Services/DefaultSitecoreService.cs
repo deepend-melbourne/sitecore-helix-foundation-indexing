@@ -5,7 +5,7 @@ using Sitecore.Foundation.DependencyInjection;
 
 namespace Sitecore.Foundation.Indexing.Services
 {
-    [Service]
+    [Service(ServiceType = typeof(ISitecoreService))]
     public class DefaultSitecoreService : SitecoreService
     {
         public DefaultSitecoreService(Database database, string contextName = "Default")

@@ -15,7 +15,7 @@ namespace Sitecore.Foundation.Indexing.Services
             where TSearchRequest : SearchRequest
             where TModel : class, IBaseItem
     {
-        public SearchService(DefaultSitecoreService sitecoreService)
+        public SearchService(ISitecoreService sitecoreService)
         {
             SitecoreService = sitecoreService;
         }
